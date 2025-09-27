@@ -2,7 +2,7 @@
 import Header from './components/Header.vue'
 import Main from './components/Main.vue'
 import Footers from './components/Footers.vue'
-import { NConfigProvider, NFlex, NLayout, NLayoutHeader, NLayoutSider, NLayoutContent, NLayoutFooter } from 'naive-ui'
+import { NConfigProvider, NLayout, NLayoutHeader, NLayoutContent, NLayoutFooter } from 'naive-ui'
 import { useUserStore } from './stores'
 // import { lightTheme } from 'naive-ui'
 const userStore = useUserStore()
@@ -35,6 +35,7 @@ const userStore = useUserStore()
 .n-layout-scroll-container {
   display: flex;
   flex-direction: column;
-
+  /* 由于组件库padding写在行内,所以添加 !important 覆盖 */
+  padding: 0 !important;
 }
 </style>
