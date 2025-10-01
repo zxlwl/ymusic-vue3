@@ -1,22 +1,20 @@
 import { defineStore } from 'pinia'
-import type { GlobalTheme } from 'naive-ui'
-import { lightTheme } from 'naive-ui'
 export const useUserStore = defineStore('user', {
     state: (): {
         name: string,
         image: string,
-        theme: GlobalTheme,
+        themeType: 'light' | 'dark'
     } => ({
         name: 'user',
         image: '',
-        theme: lightTheme,
+        themeType: 'light'
     }),
     persist: {
         key: 'user',
     },
     actions: {
-        setTheme(theme: GlobalTheme | null) {
-            this.theme = theme || lightTheme
+        setTheme(theme: 'light' | 'dark') {
+            this.themeType = theme
         }
     }
 })

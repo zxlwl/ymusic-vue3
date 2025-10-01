@@ -4,7 +4,7 @@ const userStore = useUserStore();
 </script>
 
 <template>
-    <div :style="{ color: userStore.theme.name == 'light' ? '#000' : '#fff' }">
+    <div :style="{ color: userStore.themeType === 'light' ? '#000' : '#fff' }">
         <slot></slot>
     </div>
 </template>

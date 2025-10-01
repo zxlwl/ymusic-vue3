@@ -1,6 +1,6 @@
 <script setup>
 import { useMusicDataStore, useTemporaryStore } from '../stores'
-import { NSplit, NFlex } from 'naive-ui'
+import { NSplit, NFlex, NTabs, NTabPane } from 'naive-ui'
 import MusicList from './MusicList.vue'
 import MainWelcome from './MainWelcome.vue'
 import MainSearchList from './MainSearchList.vue'
@@ -12,7 +12,18 @@ const temporaryStore = useTemporaryStore()
     <n-flex vertical style="height: 100%;width: 100%;flex: 1;">
         <n-split :default-size=0.2 style="display: flex; height: 100%;width: 100%;flex: 1;">
             <template #1>
-                <MusicList style="height: 100%;width: 100%;flex: 1;"></MusicList>
+
+                <n-tabs v-model:value="temporaryStore.mainLeftShowType" justify-content="space-evenly">
+                    <n-tab-pane label="控制" name="0">
+
+                    </n-tab-pane>
+                    <n-tab-pane label="播放列表" name="1">
+                        <MusicList style="height: 100%;width: 100%;flex: 1;">
+                        </MusicList>
+                    </n-tab-pane>
+                </n-tabs>
+
+
             </template>
             <template #2>
                 <MainWelcome v-if="temporaryStore.mainShowType == 0" style="height: 100%;width: 100%;" />

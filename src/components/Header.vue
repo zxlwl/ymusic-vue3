@@ -1,16 +1,16 @@
 <script setup lang="ts">
 
 import { useTemporaryStore, useUserStore, useApiStore } from '../stores'
-import { NInput, NFlex, NIcon, NSwitch, darkTheme, lightTheme } from 'naive-ui'
+import { NInput, NFlex, NIcon, NSwitch } from 'naive-ui'
 import { Search } from '@vicons/ionicons5'
 import Text from './Text.vue'
 
 const temporaryStore = useTemporaryStore()
 const userStore = useUserStore()
 const apiStore = useApiStore()
+//TODO: 主题切换失效
 const onChangeSwitch = (value: boolean) => {
-    console.log(value)
-    userStore.theme = (value ? darkTheme : lightTheme)
+    userStore.setTheme(value ? 'dark' : 'light')
 }
 const SearchMusic = async (text: string) => {
     const res = await apiStore.search(text, 1, 10)
@@ -31,12 +31,13 @@ const SearchMusic = async (text: string) => {
             <n-input @keyup.enter="SearchMusic(temporaryStore.searchText)" placeholder="Search Text"
                 v-model:value="temporaryStore.searchText" style="height: 60%;margin-right: 5px;"></n-input>
             <n-icon @click="SearchMusic(temporaryStore.searchText)"
-                :color="userStore.theme.name == 'light' ? '#000' : '#fff'" :component="Search" :size=20
-                style="margin: 10px;" />
+                :color="userStore.themeType === 'light' ? '#000' : '#fff'" :component="Search" :size=20
+                style="margin: 10px; cursor: pointer;" />
         </div>
         <div style="display: flex; justify-content: center;align-items: center;">
             <n-switch @update-value="(value: boolean) => onChangeSwitch(value)"
-                :v-model:value="userStore.theme == darkTheme" style="margin: 10px;">
+                :default-value="userStore.themeType === 'light'" :value="userStore.themeType === 'dark'"
+                style="margin: 10px;">
                 <template #checked>Dark</template>
                 <template #unchecked>Light</template>
             </n-switch>

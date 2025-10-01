@@ -10,7 +10,7 @@ export type MusicData = {
     album: string,
     duration: number,
     url: string,
-    cover: string,
+    pic: string,
 }
 export const useMusicDataStore = defineStore("musicData", {
     state: (): {

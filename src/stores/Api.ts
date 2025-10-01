@@ -6,7 +6,7 @@ export const useApiStore = defineStore('api', {
         searchMusicData: object,
         musicData: MusicData | object,
     } => ({
-        api: 'https://www.lihouse.xyz/coco_widget/music_resource/',
+        api: 'http://www.lihouse.xyz/coco_widget/music_resource/',
         searchMusicData: {},
         musicData: {},
     }),

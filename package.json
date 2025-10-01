@@ -15,9 +15,12 @@
   },
   "devDependencies": {
     "@vicons/ionicons5": "^0.13.0",
+    "@vicons/tabler": "^0.13.0",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/tsconfig": "^0.7.0",
     "naive-ui": "^2.43.0",
+    "sass-embedded": "^1.93.2",
+    "scss": "^0.2.4",
     "typescript": "~5.8.3",
     "vite": "^7.1.2",
     "vite-plugin-vue-devtools": "^8.0.2",
