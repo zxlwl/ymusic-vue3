@@ -6,11 +6,13 @@ export const useTemporaryStore = defineStore('temporary', {
         searchMusicList: object,
         mainShowType: number,
         mainLeftShowType: number,
+        mainPlayInterface: boolean,
     } => ({
         searchText: '',
         searchMusicList: {},
         mainShowType: 0,
         mainLeftShowType: 0,
+        mainPlayInterface: false,
     }),
     actions: {
         playMusic(item: object): void {

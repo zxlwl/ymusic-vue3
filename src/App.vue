@@ -16,7 +16,7 @@ const userStore = useUserStore()
       <Main />
       <Footers />
     </n-flex> -->
-    <n-layout style="height: 100%;width: 100%;flex: 1;display: flex;flex-direction: column;">
+    <n-layout style="overflow: hidden; height: 100%;width: 100%;flex: 1;display: flex;flex-direction: column;">
       <n-layout-header>
         <Header />
       </n-layout-header>
@@ -34,6 +34,8 @@ const userStore = useUserStore()
 .n-layout-scroll-container {
   display: flex;
   flex-direction: column;
+  /* 去除滑动条(目前不知道为什么会出现滑动条 fuck css) */
+  overflow: hidden;
   /* 由于组件库padding写在行内,所以添加 !important 覆盖 */
   padding: 0 !important;
 }

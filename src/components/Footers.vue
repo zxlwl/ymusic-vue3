@@ -1,13 +1,14 @@
 <script setup>
 import { NFlex, NImage, NIcon } from 'naive-ui'
-import { useMusicDataStore } from '../stores'
+import { useMusicDataStore, useTemporaryStore } from '../stores'
 import { ArrowBarToUp } from '@vicons/tabler'
 const musicDataStore = useMusicDataStore()
+const temporaryStore = useTemporaryStore()
 </script>
 
 <template>
     <n-flex justify="space-between" align="center" style="height: 60px;width: 100%;padding: 5px;">
-        <div class="imageDiv">
+        <div class="imageDiv" @click="temporaryStore.mainPlayInterface = !temporaryStore.mainPlayInterface">
             <n-icon :component="ArrowBarToUp" size="24" class="imageIcon"></n-icon>
             <n-image preview-disabled width="50" height="50"
                 :src="musicDataStore.musicList[musicDataStore.nowPlaying]?.pic" class="image"></n-image>
