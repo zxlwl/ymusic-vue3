@@ -8,6 +8,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"] // 告诉TypeScript @的解析规则
-    }
+    },
+    "strictFunctionTypes": true,
+    // "allowImportingTsExtensions": true,
+    "strictNullChecks": true
   }
 }

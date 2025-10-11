@@ -8,7 +8,8 @@ const musicStore = useMusicDataStore();
 
 <template>
     <n-list :hoverable="true" style="height: 100%;width: 100%;flex: 1;">
-        <n-list-item v-for="item in musicStore.musicList" :key="item.id" style="text-align: start;">
+        <n-list-item v-for="item in musicStore.musicList" :key="item.id" style="text-align: start;"
+            @click="musicStore.playMusic(item)">
             <div style="display: flex;justify-content:space-between;width: 100%;">
                 {{ item.name }}
                 <n-icon :component="TrashBin" color="red" />

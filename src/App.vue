@@ -2,7 +2,7 @@
 import Header from './components/Header.vue'
 import Main from './components/Main.vue'
 import Footers from './components/Footers.vue'
-import { NConfigProvider, NLayout, NLayoutHeader, NLayoutContent, NLayoutFooter, lightTheme, darkTheme } from 'naive-ui'
+import { NConfigProvider, NLayout, NLayoutHeader, NLayoutContent, NLayoutFooter, lightTheme, darkTheme, NLoadingBarProvider } from 'naive-ui'
 import { useUserStore } from './stores'
 const userStore = useUserStore()
 
@@ -16,17 +16,19 @@ const userStore = useUserStore()
       <Main />
       <Footers />
     </n-flex> -->
-    <n-layout style="overflow: hidden; height: 100%;width: 100%;flex: 1;display: flex;flex-direction: column;">
-      <n-layout-header>
-        <Header />
-      </n-layout-header>
-      <n-layout-content content-style="height:100%;padding: 24px;flex: 1;">
-        <Main />
-      </n-layout-content>
-      <n-layout-footer>
-        <Footers />
-      </n-layout-footer>
-    </n-layout>
+    <n-loading-bar-provider>
+      <n-layout style="overflow: hidden; height: 100%;width: 100%;flex: 1;display: flex;flex-direction: column;">
+        <n-layout-header>
+          <Header />
+        </n-layout-header>
+        <n-layout-content content-style="height:100%;padding: 24px;flex: 1;">
+          <Main />
+        </n-layout-content>
+        <n-layout-footer>
+          <Footers />
+        </n-layout-footer>
+      </n-layout>
+    </n-loading-bar-provider>
   </NConfigProvider>
 </template>
 

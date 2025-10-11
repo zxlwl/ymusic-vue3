@@ -39,7 +39,7 @@ const userStore = useUserStore()
                 width: '100%',
                 backgroundColor: 'red',
                 transition: 'all 0.5s ease',
-                backgroundColor: userStore.themeType === 'light' ? '#FAFAFC' : '#18181C',
+                backgroundColor: userStore.themeType === 'light' ? '#FAFAFC' : '#101014',
             }" v-if="temporaryStore.mainPlayInterface" />
         </Transition>
     </n-flex>

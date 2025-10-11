@@ -1,22 +1,62 @@
-<script setup>
-import { NFlex, NImage, NIcon } from 'naive-ui'
-import { useMusicDataStore, useTemporaryStore } from '../stores'
-import { ArrowBarToUp } from '@vicons/tabler'
+<script setup lang="ts">
+import { NFlex, NImage, NIcon, NSlider } from 'naive-ui'
+import { useMusicDataStore, useTemporaryStore, audio } from '../stores'
+import { ArrowBarToUp, ArrowBigLeftLine, ArrowBigRightLine } from '@vicons/tabler'
+import { Play, Pause } from '@vicons/ionicons5'
+import { EdtLoop, Loop } from '@vicons/carbon'
+import { Random } from '@vicons/fa'
+import { ref } from 'vue'
 const musicDataStore = useMusicDataStore()
 const temporaryStore = useTemporaryStore()
+const seconds = ref(0)
+const changePlayType = () => {
+    musicDataStore.playType++
+    if (musicDataStore.playType > 3) {
+        musicDataStore.playType = 1
+    }
+}
+const updateSeconds = setInterval(() => {
+    seconds.value = audio.value.currentTime
+}, 500)
+// 监听音乐播放结束事件，清除定时器
+audio.value.addEventListener('ended', () => {
+    clearInterval(updateSeconds)
+})
+
+const changeCurrentTime = (value: number) => {
+    console.log(value);
+    musicDataStore.setSeconds(value)
+}
 </script>
 
 <template>
-    <n-flex justify="space-between" align="center" style="height: 60px;width: 100%;padding: 5px;">
-        <div class="imageDiv" @click="temporaryStore.mainPlayInterface = !temporaryStore.mainPlayInterface">
-            <n-icon :component="ArrowBarToUp" size="24" class="imageIcon"></n-icon>
-            <n-image preview-disabled width="50" height="50"
-                :src="musicDataStore.musicList[musicDataStore.nowPlaying]?.pic" class="image"></n-image>
-        </div>
-        <div>
-            <n-icon></n-icon>
-        </div>
-        <div></div>
+    <n-flex vertical justify="space-between" align="center" style="height: auto;width: 100%;padding: 5px;">
+        <n-slider v-model:value="seconds" @update:value="(value: number) => changeCurrentTime(value)"
+            :max="audio.duration" :tooltip="false" />
+        <n-flex justify="space-between" align="center" style="flex: 1;width: 100%">
+            <div class="imageDiv" @click="temporaryStore.mainPlayInterface = !temporaryStore.mainPlayInterface">
+                <n-icon :component="ArrowBarToUp" size="24" class="imageIcon"></n-icon>
+                <n-image preview-disabled width="50" height="50"
+                    :src="musicDataStore.musicList[musicDataStore.nowPlaying]?.pic" class="image"></n-image>
+            </div>
+            <div>
+                <n-icon :component="ArrowBigLeftLine" size="32" class="icon"></n-icon>
+
+                <n-icon v-if="musicDataStore.isPlaying" @click="musicDataStore.playPauseMusic()" :component="Pause"
+                    size="32" class="icon"></n-icon>
+                <n-icon v-else @click="musicDataStore.playPauseMusic()" :component="Play" size="32"
+                    class="icon"></n-icon>
+                <n-icon :component="ArrowBigRightLine" size="32" class="icon"></n-icon>
+            </div>
+            <div>
+                <n-icon @click="changePlayType" v-if="musicDataStore.playType == 1" :component="EdtLoop" size="32"
+                    class="icon"></n-icon>
+                <n-icon @click="changePlayType" v-if="musicDataStore.playType == 2" :component="Loop" size="32"
+                    class="icon"></n-icon>
+                <n-icon @click="changePlayType" v-if="musicDataStore.playType == 3" :component="Random" size="32"
+                    class="icon"></n-icon>
+            </div>
+        </n-flex>
     </n-flex>
 </template>
 
@@ -42,5 +82,9 @@ const temporaryStore = useTemporaryStore()
             // background-color: rgba(32, 27, 27, 0.2);
         }
     }
+}
+
+.icon {
+    margin: 10px;
 }
 </style>

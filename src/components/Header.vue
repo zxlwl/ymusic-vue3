@@ -1,22 +1,26 @@
 <script setup lang="ts">
 
 import { useTemporaryStore, useUserStore, useApiStore } from '../stores'
-import { NInput, NFlex, NIcon, NSwitch } from 'naive-ui'
+import { NInput, NFlex, NIcon, NSwitch, useLoadingBar } from 'naive-ui'
 import { Search } from '@vicons/ionicons5'
 import Text from './Text.vue'
 
 const temporaryStore = useTemporaryStore()
 const userStore = useUserStore()
 const apiStore = useApiStore()
+const loadingBar = useLoadingBar()
 //TODO: 主题切换失效
 const onChangeSwitch = (value: boolean) => {
     userStore.setTheme(value ? 'dark' : 'light')
 }
 const SearchMusic = async (text: string) => {
+    loadingBar.start()
     const res = await apiStore.search(text, 1, 10)
     if (res === 'error') {
+        loadingBar.error()
         return 'error'
     }
+    loadingBar.finish()
     temporaryStore.searchMusicList = res
     temporaryStore.mainShowType = 1
 }
