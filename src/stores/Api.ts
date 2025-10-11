@@ -6,7 +6,7 @@ export const useApiStore = defineStore('api', {
         searchMusicData: object,
         musicData: object,
     } => ({
-        api: '/api/',
+        api: import.meta.env.VITE_API_BASE_URL,
         searchMusicData: {},
         musicData: {},
     }),
