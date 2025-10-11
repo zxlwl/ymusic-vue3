@@ -176,6 +176,8 @@ export const useMusicDataStore = defineStore("musicData", {
         },
         pushlyric(lyric: string, time: number, num: number) {
             this.nowLyricIndex = num
+            console.log(lyric, time, num);
+
         },
         playPauseMusic() {
             if (audio.value.paused) {
