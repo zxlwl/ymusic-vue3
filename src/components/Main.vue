@@ -5,6 +5,7 @@ import MusicList from './MusicList.vue'
 import MainWelcome from './MainWelcome.vue'
 import MainSearchList from './MainSearchList.vue'
 import PlayInterface from './PlayInterface.vue'
+import MainLeftControl from './MainLeftControl.vue'
 const musicStore = useMusicDataStore()
 const temporaryStore = useTemporaryStore()
 const userStore = useUserStore()
@@ -17,10 +18,11 @@ const userStore = useUserStore()
                 style="display: flex; height: 100%;width: 100%;flex: 1;">
                 <template #1>
                     <n-tabs v-model:value="temporaryStore.mainLeftShowType" justify-content="space-evenly">
-                        <n-tab-pane label="控制" name="0">
-
+                        <n-tab-pane label="控制" :name="0">
+                            <MainLeftControl style="height: 100%;width: 100%;flex: 1;">
+                            </MainLeftControl>
                         </n-tab-pane>
-                        <n-tab-pane label="播放列表" name="1">
+                        <n-tab-pane label="播放列表" :name="1">
                             <MusicList style="height: 100%;width: 100%;flex: 1;">
                             </MusicList>
                         </n-tab-pane>

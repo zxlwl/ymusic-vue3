@@ -9,6 +9,7 @@ export const useTemporaryStore = defineStore('temporary', {
         mainLeftShowType: number,
         mainPlayInterface: boolean,
         isPlay: boolean,
+        controlIndex: number,
     } => ({
         searchText: '',
         searchPage: 1,
@@ -17,6 +18,7 @@ export const useTemporaryStore = defineStore('temporary', {
         mainLeftShowType: 0,
         mainPlayInterface: false,
         isPlay: false,
+        controlIndex: 0,
     }),
     actions: {
         playMusic(item: object): void {
