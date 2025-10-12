@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { NFlex, NImage, NIcon, NSlider } from 'naive-ui'
 import { useMusicDataStore, useTemporaryStore, audio } from '../stores'
-import { ArrowBarToUp, ArrowBigLeftLine, ArrowBigRightLine } from '@vicons/tabler'
-import { Play, Pause } from '@vicons/ionicons5'
-import { EdtLoop, Loop } from '@vicons/carbon'
-import { Random } from '@vicons/fa'
+import { ArrowBarToUp } from '@vicons/tabler'
 import { ref } from 'vue'
 const musicDataStore = useMusicDataStore()
 const temporaryStore = useTemporaryStore()
