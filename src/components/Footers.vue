@@ -15,12 +15,31 @@ const changePlayType = () => {
         musicDataStore.playType = 1
     }
 }
-const updateSeconds = setInterval(() => {
+// const updateSeconds = 
+setInterval(() => {
     seconds.value = audio.value.currentTime
 }, 500)
 // 监听音乐播放结束事件，清除定时器
 audio.value.addEventListener('ended', () => {
-    clearInterval(updateSeconds)
+    // clearInterval(updateSeconds)
+    musicDataStore.clearAllTimers()
+    // 循环播放
+    if (musicDataStore.playType == 1) {
+        musicDataStore.playMusic(musicDataStore.musicList[musicDataStore.nowPlaying])
+    }
+    // 顺序播放
+    else if (musicDataStore.playType == 2) {
+        musicDataStore.nowPlaying++
+        if (musicDataStore.nowPlaying >= musicDataStore.musicList.length) {
+            musicDataStore.nowPlaying = 0
+        }
+        musicDataStore.playMusic(musicDataStore.musicList[musicDataStore.nowPlaying])
+    }
+    // 随机播放
+    else {
+        musicDataStore.nowPlaying = Math.floor(Math.random() * musicDataStore.musicList.length)
+        musicDataStore.playMusic(musicDataStore.musicList[musicDataStore.nowPlaying])
+    }
 })
 
 const changeCurrentTime = (value: number) => {

@@ -65,4 +65,16 @@ const userStore = useUserStore()
 .play-interface-leave-to {
     transform: translateY(100%);
 }
+
+.n-tabs {
+    height: 100%;
+}
+
+.n-tab-pane {
+    height: calc(100% - 33px);
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}
 </style>
