@@ -3,6 +3,7 @@ import { useMusicDataStore, type MusicData } from './MusicData'
 export const useTemporaryStore = defineStore('temporary', {
     state: (): {
         searchText: string,
+        searchPage: number,
         searchMusicList: object,
         mainShowType: number,
         mainLeftShowType: number,
@@ -10,6 +11,7 @@ export const useTemporaryStore = defineStore('temporary', {
         isPlay: boolean,
     } => ({
         searchText: '',
+        searchPage: 1,
         searchMusicList: {},
         mainShowType: 0,
         mainLeftShowType: 0,
@@ -18,7 +20,6 @@ export const useTemporaryStore = defineStore('temporary', {
     }),
     actions: {
         playMusic(item: object): void {
-            console.log(item)
             const musicDataStore = useMusicDataStore()
             musicDataStore.musicList.push(item as MusicData)
             musicDataStore.playMusic(item as MusicData)

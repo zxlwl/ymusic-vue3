@@ -15,7 +15,7 @@ const onChangeSwitch = (value: boolean) => {
 }
 const SearchMusic = async (text: string) => {
     loadingBar.start()
-    const res = await apiStore.search(text, 1, 10)
+    const res = await apiStore.search(text, 1, 15)
     if (res === 'error') {
         loadingBar.error()
         return 'error'

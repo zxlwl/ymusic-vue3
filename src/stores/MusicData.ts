@@ -196,6 +196,19 @@ export const useMusicDataStore = defineStore("musicData", {
             audio.value.currentTime = seconds
             this.resetLyric(seconds * 1000)
         },
+        //快进
+        fastForward(seconds: number) {
+            audio.value.currentTime += seconds
+            this.resetLyric(audio.value.currentTime * 1000)
+        },
+        //快退
+        fastBackward(seconds: number) {
+            audio.value.currentTime -= seconds
+            this.resetLyric(audio.value.currentTime * 1000)
+        },
+        removeMusic(index: number) {
+            this.musicList.splice(index, 1)
+        }
     },
     persist: {
         key: "musicData",

@@ -59,13 +59,14 @@ const changeCurrentTime = (value: number) => {
                     :src="musicDataStore.musicList[musicDataStore.nowPlaying]?.pic" class="image"></n-image>
             </div>
             <div>
-                <n-icon :component="ArrowBigLeftLine" size="32" class="icon"></n-icon>
-
+                <n-icon @click="() => musicDataStore.fastBackward(5)" :component="ArrowBigLeftLine" size="32"
+                    class="icon"></n-icon>
                 <n-icon v-if="musicDataStore.isPlaying" @click="musicDataStore.playPauseMusic()" :component="Pause"
                     size="32" class="icon"></n-icon>
                 <n-icon v-else @click="musicDataStore.playPauseMusic()" :component="Play" size="32"
                     class="icon"></n-icon>
-                <n-icon :component="ArrowBigRightLine" size="32" class="icon"></n-icon>
+                <n-icon @click="() => musicDataStore.fastForward(5)" :component="ArrowBigRightLine" size="32"
+                    class="icon"></n-icon>
             </div>
             <div>
                 <n-icon @click="changePlayType" v-if="musicDataStore.playType == 1" :component="EdtLoop" size="32"
