@@ -57,7 +57,7 @@ const changeCurrentTime = (value: number) => {
                     :src="musicDataStore.musicList[musicDataStore.nowPlaying]?.pic" class="image"></n-image>
             </div>
             <div>
-                <n-icon @click="() => musicDataStore.fastBackward(5)" size="32" class="icon">
+                <n-icon @click="() => musicDataStore.fastBackward(10)" size="32" class="icon">
                     <div class="mgc_rewind_backward_10_line"></div>
                 </n-icon>
                 <n-icon v-if="musicDataStore.isPlaying" @click="musicDataStore.playPauseMusic()" size="32" class="icon">
@@ -66,7 +66,7 @@ const changeCurrentTime = (value: number) => {
                 <n-icon v-else @click="musicDataStore.playPauseMusic()" size="32" class="icon">
                     <div class="mgc_play_fill"></div>
                 </n-icon>
-                <n-icon @click="() => musicDataStore.fastForward(5)" size="32" class="icon">
+                <n-icon @click="() => musicDataStore.fastForward(10)" size="32" class="icon">
                     <div class="mgc_rewind_forward_10_line"></div>
                 </n-icon>
             </div>

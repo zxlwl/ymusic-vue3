@@ -207,6 +207,14 @@ export const useMusicDataStore = defineStore("musicData", {
             this.resetLyric(audio.value.currentTime * 1000)
         },
         removeMusic(index: number) {
+            if (index < this.nowPlaying) {
+                this.nowPlaying--
+            }
+            else if (index == this.nowPlaying) {
+                this.playPauseMusic()
+                this.nowPlaying = -1
+                this.lyric = []
+            }
             this.musicList.splice(index, 1)
         }
     },
