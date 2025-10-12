@@ -21,10 +21,12 @@ export const useTemporaryStore = defineStore('temporary', {
         controlIndex: 0,
     }),
     actions: {
-        playMusic(item: object): void {
+        playMusic(item: MusicData): void {
             const musicDataStore = useMusicDataStore()
-            musicDataStore.musicList.push(item as MusicData)
-            musicDataStore.playMusic(item as MusicData)
+            if (!musicDataStore.musicList.find((music: MusicData) => music.id == item.id)) {
+                musicDataStore.musicList.push(item)
+            }
+            musicDataStore.playMusic(item)
         }
     }
 })

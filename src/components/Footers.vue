@@ -55,26 +55,34 @@ const changeCurrentTime = (value: number) => {
         <n-flex justify="space-between" align="center" style="flex: 1;width: 100%">
             <div class="imageDiv" @click="temporaryStore.mainPlayInterface = !temporaryStore.mainPlayInterface">
                 <n-icon :component="ArrowBarToUp" size="24" class="imageIcon"></n-icon>
+
                 <n-image preview-disabled width="50" height="50"
                     :src="musicDataStore.musicList[musicDataStore.nowPlaying]?.pic" class="image"></n-image>
             </div>
             <div>
-                <n-icon @click="() => musicDataStore.fastBackward(5)" :component="ArrowBigLeftLine" size="32"
-                    class="icon"></n-icon>
-                <n-icon v-if="musicDataStore.isPlaying" @click="musicDataStore.playPauseMusic()" :component="Pause"
-                    size="32" class="icon"></n-icon>
-                <n-icon v-else @click="musicDataStore.playPauseMusic()" :component="Play" size="32"
-                    class="icon"></n-icon>
-                <n-icon @click="() => musicDataStore.fastForward(5)" :component="ArrowBigRightLine" size="32"
-                    class="icon"></n-icon>
+                <n-icon @click="() => musicDataStore.fastBackward(5)" size="32" class="icon">
+                    <div class="mgc_rewind_backward_10_line"></div>
+                </n-icon>
+                <n-icon v-if="musicDataStore.isPlaying" @click="musicDataStore.playPauseMusic()" size="32" class="icon">
+                    <div class="mgc_pause_fill"></div>
+                </n-icon>
+                <n-icon v-else @click="musicDataStore.playPauseMusic()" size="32" class="icon">
+                    <div class="mgc_play_fill"></div>
+                </n-icon>
+                <n-icon @click="() => musicDataStore.fastForward(5)" size="32" class="icon">
+                    <div class="mgc_rewind_forward_10_line"></div>
+                </n-icon>
             </div>
             <div>
-                <n-icon @click="changePlayType" v-if="musicDataStore.playType == 1" :component="EdtLoop" size="32"
-                    class="icon"></n-icon>
-                <n-icon @click="changePlayType" v-if="musicDataStore.playType == 2" :component="Loop" size="32"
-                    class="icon"></n-icon>
-                <n-icon @click="changePlayType" v-if="musicDataStore.playType == 3" :component="Random" size="32"
-                    class="icon"></n-icon>
+                <n-icon @click="changePlayType" v-if="musicDataStore.playType == 1" size="32" class="icon">
+                    <div class="mgc_repeat_one_line"></div>
+                </n-icon>
+                <n-icon @click="changePlayType" v-if="musicDataStore.playType == 2" size="32" class="icon">
+                    <div class="mgc_repeat_line"></div>
+                </n-icon>
+                <n-icon @click="changePlayType" v-if="musicDataStore.playType == 3" size="32" class="icon">
+                    <div class="mgc_shuffle_2_line"></div>
+                </n-icon>
             </div>
         </n-flex>
     </n-flex>
