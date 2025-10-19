@@ -216,7 +216,33 @@ export const useMusicDataStore = defineStore("musicData", {
                 this.lyric = []
             }
             this.musicList.splice(index, 1)
+        },
+
+        async downloadMusic(item: MusicData) {
+            try {
+                const response = await fetch(audio.value.src, {
+                    mode: 'cors', // 跨域请求需服务端允许
+                    headers: {
+                        // 若有需要，添加认证头（如 Token）
+                    }
+                });
+                if (!response.ok) throw new Error('下载失败');
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+
+                // 用 Blob URL 下载，避免跨域问题
+                const a = document.createElement('a');
+                a.href = blobUrl;
+                a.download = item.name + '.mp3';
+                a.click();
+
+                // 清理 Blob URL，释放内存
+                URL.revokeObjectURL(blobUrl);
+            } catch (error) {
+                console.error('下载出错：', error);
+            }
         }
+
     },
     persist: {
         key: "musicData",

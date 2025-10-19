@@ -71,13 +71,17 @@ const changeCurrentTime = (value: number) => {
                 </n-icon>
             </div>
             <div>
-                <n-icon @click="changePlayType" v-if="musicDataStore.playType == 1" size="32" class="icon">
+                <n-icon @click="() => musicDataStore.downloadMusic(musicDataStore.musicList[musicDataStore.nowPlaying])"
+                    size="32" class="icon">
+                    <div class="mgc_download_2_fill"></div>
+                </n-icon>
+                <n-icon @click="changePlayType" v-if="musicDataStore.playType == 1" size="36" class="icon">
                     <div class="mgc_repeat_one_line"></div>
                 </n-icon>
-                <n-icon @click="changePlayType" v-if="musicDataStore.playType == 2" size="32" class="icon">
+                <n-icon @click="changePlayType" v-if="musicDataStore.playType == 2" size="36" class="icon">
                     <div class="mgc_repeat_line"></div>
                 </n-icon>
-                <n-icon @click="changePlayType" v-if="musicDataStore.playType == 3" size="32" class="icon">
+                <n-icon @click="changePlayType" v-if="musicDataStore.playType == 3" size="36" class="icon">
                     <div class="mgc_shuffle_2_line"></div>
                 </n-icon>
             </div>
