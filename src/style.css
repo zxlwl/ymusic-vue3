@@ -1,45 +1,124 @@
+/* ========== 全局重置与基础 ========== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 :root {
-  width: 100%;
-  height: 100%;
+  /* 亮色主题变量 */
+  --bg-primary: #f2f4f8; /* 稍冷的灰白色，更有质感 */
+  --bg-secondary: rgba(255, 255, 255, 0.85); /* 半透明背景，用于玻璃拟态 */
+  --bg-elevated: #ffffff;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+  --accent: #6366f1; /* Indigo 500 */
+  --accent-hover: #4f46e5; /* Indigo 600 */
+  --accent-soft: rgba(99, 102, 241, 0.08);
+  --border: rgba(0, 0, 0, 0.06);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --radius: 16px; /* 更圆润的圆角 */
+  --radius-sm: 8px;
+  --header-height: 64px;
+  --footer-height: 80px;
+  --glass-blur: 12px;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0f172a; /* Slate 900 */
+  --bg-secondary: rgba(30, 41, 59, 0.7); /* Slate 800 with opacity */
+  --bg-elevated: #1e293b; /* Slate 800 */
+  --text-primary: #f3f4f6;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  --accent: #818cf8; /* Indigo 400 */
+  --accent-hover: #a5b4fc; /* Indigo 300 */
+  --accent-soft: rgba(129, 140, 248, 0.15);
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  height: 100%;
-  width: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s ease;
+  overflow: hidden; /* 防止body滚动，由内部容器滚动 */
 }
-
 
 #app {
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
   width: 100%;
-  height: 100%;
-  max-height: 100vh;
-  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-html {
-  overflow: hidden;
-  /* 隐藏滚动条 */
-  scrollbar-width: none;
-  /* Firefox */
-  -ms-overflow-style: none;
-  /* IE 和 Edge */
+/* ========== 自定义滚动条 ========== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.5);
+}
+
+/* ========== 通用工具类 ========== */
+.glass {
+  background: var(--bg-secondary);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--border);
+}
+
+.rounded {
+  border-radius: var(--radius);
+}
+
+.rounded-sm {
+  border-radius: var(--radius-sm);
+}
+
+/* 图标颜色继承 */
 [class^='mgc_']::before,
 [class*=' mgc_']::before {
   color: inherit !important;
+}
+
+/* 文本截断 */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 简单的淡入动画 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }

@@ -36,47 +36,80 @@ const userStore = useUserStore()
             </n-split>
         </Transition>
         <Transition name="play-interface">
-            <PlayInterface :style="{
-                height: '100%',
-                width: '100%',
-                backgroundColor: 'red',
-                transition: 'all 0.5s ease',
-                backgroundColor: userStore.themeType === 'light' ? '#FAFAFC' : '#101014',
-            }" v-if="temporaryStore.mainPlayInterface" />
+            <PlayInterface class="play-interface-panel" v-if="temporaryStore.mainPlayInterface" />
         </Transition>
     </n-flex>
 </template>
 
 <style scoped>
+.a {
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  position: relative;
+  background: var(--bg-primary);
+}
+
+.play-interface-panel {
+  height: 100%;
+  width: 100%;
+  background: var(--bg-elevated);
+  border-radius: var(--radius) var(--radius) 0 0;
+  box-shadow: 0 -4px 24px var(--shadow-md);
+  transition: all 0.4s ease;
+}
+
 .v-enter-active,
 .v-leave-active {
-    transition: opacity 0.2s ease;
+  transition: opacity 0.25s ease;
 }
 
 .v-enter-from,
 .v-leave-to {
-    opacity: 0;
+  opacity: 0;
 }
 
 .play-interface-enter-active,
 .play-interface-leave-active {
-    transition: transform 0.5s ease;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .play-interface-enter-from,
 .play-interface-leave-to {
-    transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+:deep(.n-split-pane-1) {
+  background: var(--bg-secondary);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+
+:deep(.n-split-pane-2) {
+  background: var(--bg-secondary);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  overflow: hidden;
 }
 
 .n-tabs {
-    height: 100%;
+  height: 100%;
+  padding: 0 8px;
 }
 
-.n-tab-pane {
-    height: calc(100% - 33px);
+:deep(.n-tabs-tab-list) {
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
 
-    ::-webkit-scrollbar {
-        display: none;
-    }
+:deep(.n-tab-pane) {
+  height: calc(100% - 48px);
+  padding: 0;
+}
+
+:deep(.n-tab-pane) ::-webkit-scrollbar {
+  display: none;
 }
 </style>

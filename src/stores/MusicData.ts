@@ -26,6 +26,7 @@ export const useMusicDataStore = defineStore("musicData", {
         isPlaying: boolean,
         nowPlayingData: { lyric: string },
         lyric: string[],
+        lyricTime: number[],
         timerContainer: ReturnType<typeof setTimeout>[],
         nowLyricIndex: number,
     } => ({
@@ -37,6 +38,7 @@ export const useMusicDataStore = defineStore("musicData", {
         isPlaying: false,
         nowPlayingData: { lyric: '' },
         lyric: [],
+        lyricTime: [],
         timerContainer: [],
         nowLyricIndex: 0,
     }),
@@ -82,6 +84,7 @@ export const useMusicDataStore = defineStore("musicData", {
         splitlyric(lyric: string) {
             const lines = lyric.split('\n')
             const lyrics = []
+            const lyricTimes = []
             const timeReg = /\[(\d{2}):(\d{2})\.(\d{2,3})\]/g;
             let num = 0
             for (const line of lines) {
@@ -99,6 +102,7 @@ export const useMusicDataStore = defineStore("musicData", {
                                 // console.log(minutes, seconds, milliseconds);
                                 const totalSeconds = (minutes * 60 + seconds) * 1000 + milliseconds;
                                 // console.log(`转化后的时间(秒): ${totalSeconds}`);
+                                lyricTimes.push(totalSeconds)
                                 // 建立一个存储定时器的容器
 
                                 // 为每个时间设置一个定时器，并存储于容器中
@@ -114,6 +118,7 @@ export const useMusicDataStore = defineStore("musicData", {
 
             }
             this.lyric = lyrics
+            this.lyricTime = lyricTimes
         },
         resetLyric(currentTimeMs: number = 0) {
             // 清空所有现有定时器
@@ -140,9 +145,11 @@ export const useMusicDataStore = defineStore("musicData", {
 
                                 // 计算歌词时间与当前时间的差值
                                 const timeDiff = totalSeconds - currentTimeMs;
-
+                                // console.log(timeDiff);
+                                
                                 // 只处理未来的歌词（时间差大于0）
-                                if (timeDiff > 0) {
+                                if (timeDiff >= 0) {
+                                    
                                     // console.log(`处理未来歌词: ${line}, 时间差: ${timeDiff}ms`);
                                     // 为未来的歌词添加计时器
                                     const timerId = setTimeout(() => {
@@ -150,9 +157,14 @@ export const useMusicDataStore = defineStore("musicData", {
                                         this.pushlyric(line.split(']')[1], totalSeconds, num);
                                         num++;
                                     }, timeDiff);
+                                    // console.log(timeDiff,timerId);
 
                                     // 保存定时器ID以便后续清除
                                     this.timerContainer.push(timerId);
+                                }
+                                else if(timeDiff>-8000){
+                                    this.pushlyric(line.split(']')[1], totalSeconds, num)
+                                    num++
                                 }
                                 else {
                                     num++

@@ -4,7 +4,13 @@ const userStore = useUserStore();
 </script>
 
 <template>
-    <div :style="{ color: userStore.themeType === 'light' ? '#000' : '#fff' }">
-        <slot></slot>
-    </div>
+  <div class="text-wrap">
+    <slot />
+  </div>
 </template>
+
+<style scoped>
+.text-wrap {
+  color: var(--text-primary);
+}
+</style>
